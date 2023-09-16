@@ -1,5 +1,9 @@
 package it.unisalento.smartcitywastemanagement.disposalms.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import it.unisalento.smartcitywastemanagement.disposalms.utility.GeoJsonDeserializer;
+import it.unisalento.smartcitywastemanagement.disposalms.utility.GeoJsonSerializer;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 import java.math.BigDecimal;
@@ -13,6 +17,8 @@ public class WasteDisposalDTO {
 
     private String type;
 
+    @JsonSerialize(using =GeoJsonSerializer.class)
+    @JsonDeserialize(using =GeoJsonDeserializer.class)
     private GeoJsonPoint position;
 
     private Date timestamp;
