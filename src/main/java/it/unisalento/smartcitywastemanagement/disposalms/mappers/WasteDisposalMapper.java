@@ -14,6 +14,7 @@ public class WasteDisposalMapper {
 
         WasteDisposalDTO wasteDisposalDTO = new WasteDisposalDTO();
 
+        wasteDisposalDTO.setId(wasteDisposal.getId());
         wasteDisposalDTO.setCitizenID(wasteDisposal.getCitizenID());
         wasteDisposalDTO.setAmount(wasteDisposal.getAmount().bigDecimalValue());
         wasteDisposalDTO.setType(wasteDisposal.getType());
