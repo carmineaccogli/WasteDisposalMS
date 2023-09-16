@@ -55,8 +55,8 @@ public class CitizenWasteMetricsRestController {
         return ResponseEntity.ok(allMetrics);
     }
 
-    @RequestMapping(value="/{year}", method=RequestMethod.GET)
-    public ResponseEntity<List<CitizenWasteMetricsDTO>> getAllCitizensMetricsByYear(@PathVariable @Min(2000) @Max(2100) int year) {
+    @RequestMapping(value="/year/{year}", method=RequestMethod.GET)
+    public ResponseEntity<List<CitizenWasteMetricsDTO>> getAllCitizensMetricsByYear(@PathVariable("year") @Min(2000) @Max(2100) int year) {
 
         List<CitizenWasteMetrics> results = citizenWasteMetricsService.findAllMetricsByYear(year);
 
@@ -69,8 +69,8 @@ public class CitizenWasteMetricsRestController {
     }
 
 
-    @RequestMapping(value = "/{citizenID}", method=RequestMethod.GET)
-    public CitizenWasteMetricsDTO getMetricsById(@PathVariable String citizenID) throws CitizenNotFoundException {
+    @RequestMapping(value = "/citizen/{citizenID}", method=RequestMethod.GET)
+    public CitizenWasteMetricsDTO getMetricsById(@PathVariable("citizenID") String citizenID) throws CitizenNotFoundException {
 
         CitizenWasteMetrics citizenWasteMetrics = citizenWasteMetricsService.findMetricsById(citizenID);
 
