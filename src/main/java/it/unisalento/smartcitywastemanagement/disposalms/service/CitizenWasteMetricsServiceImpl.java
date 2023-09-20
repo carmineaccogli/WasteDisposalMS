@@ -284,7 +284,7 @@ public class CitizenWasteMetricsServiceImpl implements CitizenWasteMetricsServic
         if(mixedWaste.equals(BigDecimal.ZERO) && !sortedWaste.equals(BigDecimal.ZERO)) {
             performance = 1.00f;
         // 5.2
-        } else if(sortedWaste.equals(BigDecimal.ZERO) && !mixedWaste.equals(BigDecimal.ZERO)) {
+        } else if(sortedWaste.equals(BigDecimal.valueOf(0.0)) && !mixedWaste.equals(BigDecimal.ZERO)) {
             performance = 0.00f;
         // 5.3
         } else {
