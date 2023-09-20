@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value="/api/disposal/metrics")
 @Validated
 public class CitizenWasteMetricsRestController {
