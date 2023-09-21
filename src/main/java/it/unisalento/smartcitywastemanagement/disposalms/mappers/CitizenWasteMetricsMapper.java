@@ -15,6 +15,7 @@ public class CitizenWasteMetricsMapper {
 
         CitizenWasteMetricsDTO wasteMetricsDTO = new CitizenWasteMetricsDTO();
 
+        wasteMetricsDTO.setId(citizenWasteMetrics.getId());
         wasteMetricsDTO.setCitizenID(citizenWasteMetrics.getCitizenID());
         wasteMetricsDTO.setYearlyVolumes(citizenWasteMetrics.getYearlyVolumes());
 
