@@ -9,6 +9,6 @@ public class WebAppConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://taxService:8085").allowedMethods("GET","POST");
+        registry.addMapping("/**").allowedOrigins("/**").allowedMethods("GET","POST");
     }
 }
