@@ -36,7 +36,7 @@ public class CitizenWasteMetricsRestController {
 
         Float performance = citizenWasteMetricsService.calculateCitizenPerformance(citizenID, year);
         if(performance == null)
-            return new ResponseEntity<>(new ResponseDTO("year requested: "+year,"No performance available"), HttpStatus.OK);
+            return ResponseEntity.noContent().build();
 
         return new ResponseEntity<>(new ResponseDTO("year requested: "+year, "Performance: "+performance), HttpStatus.OK);
     }
