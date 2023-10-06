@@ -12,9 +12,9 @@ public interface CitizenWasteMetricsService {
 
     List<CitizenWasteMetrics> findAllMetrics();
 
-    CitizenWasteMetrics findMetricsById(String citizenID) throws CitizenNotFoundException;
+    CitizenWasteMetrics findMetricsById(String citizenID);
 
-    Float calculateCitizenPerformance(String citizenID, int year) throws CitizenNotFoundException;
+    Float calculateCitizenPerformance(String citizenID, int year);
 
 
     List<CitizenWasteMetrics> findAllMetricsByYear(int year);

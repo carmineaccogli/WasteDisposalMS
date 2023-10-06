@@ -220,14 +220,14 @@ public class CitizenWasteMetricsServiceImpl implements CitizenWasteMetricsServic
 
 
 
-    public CitizenWasteMetrics findMetricsById(String citizenID) throws CitizenNotFoundException {
+    public CitizenWasteMetrics findMetricsById(String citizenID)  {
 
         CitizenWasteMetrics citizenWasteMetrics = null;
 
 
         Optional<CitizenWasteMetrics> optCitizenWasteMetrics = citizenWasteMetricsRepository.findByCitizenID(citizenID);
         if(!optCitizenWasteMetrics.isPresent())
-            throw new CitizenNotFoundException();
+            return null;
 
         citizenWasteMetrics = optCitizenWasteMetrics.get();
 
@@ -252,7 +252,7 @@ public class CitizenWasteMetricsServiceImpl implements CitizenWasteMetricsServic
      */
 
 
-    public Float calculateCitizenPerformance(String citizenID, int targetYear) throws CitizenNotFoundException {
+    public Float calculateCitizenPerformance(String citizenID, int targetYear)  {
 
         // 1
         CitizenWasteMetrics citizenWasteMetrics = findMetricsById(citizenID);

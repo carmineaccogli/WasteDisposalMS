@@ -32,7 +32,7 @@ public class CitizenWasteMetricsRestController {
     CitizenWasteMetricsMapper citizenWasteMetricsMapper;
 
     @RequestMapping(value = "/{citizenID}/performance/{year}", method = RequestMethod.GET)
-    public ResponseEntity<ResponseDTO> getCitizenPerformance(@PathVariable("citizenID") String citizenID, @PathVariable("year") @NotNull @Min(2000) @Max(2100) int year) throws CitizenNotFoundException {
+    public ResponseEntity<ResponseDTO> getCitizenPerformance(@PathVariable("citizenID") String citizenID, @PathVariable("year") @NotNull @Min(2000) @Max(2100) int year)  {
 
         Float performance = citizenWasteMetricsService.calculateCitizenPerformance(citizenID, year);
         if(performance == null)
@@ -69,13 +69,16 @@ public class CitizenWasteMetricsRestController {
 
 
     @RequestMapping(value = "/citizen/{citizenID}", method=RequestMethod.GET)
-    public CitizenWasteMetricsDTO getMetricsById(@PathVariable("citizenID") String citizenID) throws CitizenNotFoundException {
+    public ResponseEntity<CitizenWasteMetricsDTO> getMetricsById(@PathVariable("citizenID") String citizenID)  {
 
         CitizenWasteMetrics citizenWasteMetrics = citizenWasteMetricsService.findMetricsById(citizenID);
 
-        CitizenWasteMetricsDTO result = citizenWasteMetricsMapper.toWasteMetricsDTO(citizenWasteMetrics);
-
-        return result;
+        if( citizenWasteMetrics == null) {
+            return ResponseEntity.noContent().build();
+        }else {
+            CitizenWasteMetricsDTO result = citizenWasteMetricsMapper.toWasteMetricsDTO(citizenWasteMetrics);
+            return ResponseEntity.ok(result);
+        }
     }
 
 
