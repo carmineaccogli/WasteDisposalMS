@@ -256,6 +256,8 @@ public class CitizenWasteMetricsServiceImpl implements CitizenWasteMetricsServic
 
         // 1
         CitizenWasteMetrics citizenWasteMetrics = findMetricsById(citizenID);
+        if(citizenWasteMetrics == null)
+            return null;
 
         // 2
         GeneratedVolumePerYear targetYearMetric = null;
