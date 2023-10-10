@@ -29,7 +29,7 @@ public class APIServiceImpl implements APIService{
                 .retrieve()
                 .bodyToMono(String.class)
                 .onErrorResume(WebClientResponseException.class, error -> {
-                    if (error.getStatusCode() == HttpStatus.NOT_FOUND) {
+                    if (error.getStatusCode() !=HttpStatus.OK) {
                         return Mono.just("");
                     } else {
                         throw error;
