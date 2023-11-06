@@ -6,6 +6,7 @@ import it.unisalento.smartcitywastemanagement.disposalms.mappers.WasteDisposalMa
 import it.unisalento.smartcitywastemanagement.disposalms.service.WasteDisposalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class WasteDisposalRestController {
 
     // API per ottenere la lista di tutti i conferimenti per ID cittadino (ordinamento per data)
 
+    @PreAuthorize("hasAnyRole('ROLE_MunicipalOffice','ROLE_Citizen')")
     @RequestMapping(value="/citizen/{citizenID}", method = RequestMethod.GET)
     public ResponseEntity<List<WasteDisposalDTO>> getAllDisposalsByCitizen(@PathVariable("citizenID") String citizenID) {
 
@@ -39,6 +41,7 @@ public class WasteDisposalRestController {
     }
 
     // API per ottenere gli ultimi 4 conferimenti per ID cittadino (ordinamento per data)
+    @PreAuthorize("hasAnyRole('ROLE_MunicipalOffice','ROLE_Citizen')")
     @RequestMapping(value="/citizen/{citizenID}/last/{limit}", method = RequestMethod.GET)
     public ResponseEntity<List<WasteDisposalDTO>> getLastDisposalsByCitizen(@PathVariable("citizenID") String citizenID,@PathVariable("limit") int limit) {
 

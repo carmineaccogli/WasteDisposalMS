@@ -14,6 +14,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class CitizenWasteMetricsRestController {
     @Autowired
     CitizenWasteMetricsMapper citizenWasteMetricsMapper;
 
+    @PreAuthorize("hasAnyRole('ROLE_MunicipalOffice','ROLE_Citizen')")
     @RequestMapping(value = "/{citizenID}/performance/{year}", method = RequestMethod.GET)
     public ResponseEntity<ResponseDTO> getCitizenPerformance(@PathVariable("citizenID") String citizenID, @PathVariable("year") @NotNull @Min(2000) @Max(2100) int year)  {
 
@@ -41,6 +43,7 @@ public class CitizenWasteMetricsRestController {
         return new ResponseEntity<>(new ResponseDTO("year requested: "+year, "Performance: "+performance), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_MunicipalOffice')")
     @RequestMapping(value="/", method=RequestMethod.GET)
     public ResponseEntity<List<CitizenWasteMetricsDTO>> getAllCitizensMetrics() {
 
@@ -54,6 +57,7 @@ public class CitizenWasteMetricsRestController {
         return ResponseEntity.ok(allMetrics);
     }
 
+    @PreAuthorize("hasRole('ROLE_MunicipalOffice')")
     @RequestMapping(value="/year/{year}", method=RequestMethod.GET)
     public ResponseEntity<List<CitizenWasteMetricsDTO>> getAllCitizensMetricsByYear(@PathVariable("year") @Min(2000) @Max(2100) int year) {
 
@@ -67,7 +71,7 @@ public class CitizenWasteMetricsRestController {
         return ResponseEntity.ok(allMetrics);
     }
 
-
+    @PreAuthorize("hasAnyRole('ROLE_MunicipalOffice','ROLE_Citizen')")
     @RequestMapping(value = "/citizen/{citizenID}", method=RequestMethod.GET)
     public ResponseEntity<CitizenWasteMetricsDTO> getMetricsById(@PathVariable("citizenID") String citizenID)  {
 
