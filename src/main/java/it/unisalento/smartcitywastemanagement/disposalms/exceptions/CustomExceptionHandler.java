@@ -25,33 +25,33 @@ public class CustomExceptionHandler  {
 
 
     @ExceptionHandler(WebClientResponseException.class)
-    public ResponseEntity<Object> handleSpecificException(WebClientResponseException ex) {
-        // Creare un oggetto di risposta personalizzato per l'eccezione specifica
+    public ResponseEntity<Object> webClientResponseHandler(WebClientResponseException ex) {
+
         HttpStatusCode httpStatus = ex.getStatusCode();
         String responseBody = ex.getResponseBodyAsString();
 
         return ResponseEntity.status(httpStatus)
                 .body(new ExceptionDTO(
-                        18,
+                        23,
                         WebClientResponseException.class.getSimpleName(),
                         responseBody
                 ));
     }
 
     @ExceptionHandler(CitizenNotFoundException.class)
-    public ResponseEntity<Object> handleSpecificException(CitizenNotFoundException ex) {
-        // Creare un oggetto di risposta personalizzato per l'eccezione specifica
+    public ResponseEntity<Object> citizenNotFoundHandler(CitizenNotFoundException ex) {
+
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ExceptionDTO(
-                        20,
+                        7,
                         CitizenNotFoundException.class.getSimpleName(),
                         "Citizen ID not found in waste metrics"
                 ));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Object> handleMethodArgumentNotValid(
+    public ResponseEntity<Object> constraintViolationHandler(
             ConstraintViolationException ex) {
 
         StringBuilder errorString = new StringBuilder();
@@ -64,7 +64,7 @@ public class CustomExceptionHandler  {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionDTO(
-                        14,
+                        30,
                         ConstraintViolationException.class.getSimpleName(),
                         errorString.deleteCharAt(errorString.length() - 2).toString()
                 ));
