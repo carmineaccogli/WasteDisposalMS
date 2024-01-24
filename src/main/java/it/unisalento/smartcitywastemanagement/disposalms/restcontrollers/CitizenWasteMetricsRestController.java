@@ -57,7 +57,7 @@ public class CitizenWasteMetricsRestController {
         return ResponseEntity.ok(allMetrics);
     }
 
-    @PreAuthorize("hasRole('ROLE_MunicipalOffice')")
+    @PreAuthorize("hasAnyRole('ROLE_MunicipalOffice','ROLE_MICROSERVICE-COMMUNICATION')")
     @RequestMapping(value="/year/{year}", method=RequestMethod.GET)
     public ResponseEntity<List<CitizenWasteMetricsDTO>> getAllCitizensMetricsByYear(@PathVariable("year") @Min(2000) @Max(2100) int year) {
 

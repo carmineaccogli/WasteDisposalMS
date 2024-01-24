@@ -25,7 +25,7 @@ public class CitizenWasteMetricsServiceImpl implements CitizenWasteMetricsServic
      *
      *   1. Find per citizenID all'interno della collection
      *   2. Controllare parametro type
-     *          2.1 Se è type="Indifferenziata", aggiornare il campo mixedWaste
+     *          2.1 Se è type="MixedWaste", aggiornare il campo mixedWaste
      *          2.2 Altrimenti bisogna aggiornare il campo sortedWaste
      *   3. Save dell'entità citizenWasteMetrics modificata opportunamente
      **/
@@ -36,7 +36,7 @@ public class CitizenWasteMetricsServiceImpl implements CitizenWasteMetricsServic
         CitizenWasteMetrics citizenWasteMetrics = getWasteMetricByCitizenID(citizenID);
 
         // 2
-        if(type.equals("Indifferenziata")) {
+        if(type.equals("Mixed waste")) {
             updateMixedWaste(citizenWasteMetrics, amountToAdd);
         }
         else {
